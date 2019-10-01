@@ -1,27 +1,50 @@
-import React, {Component} from 'react';
-import Item from './Item';
-
+import React, { Component } from "react";
+import Item from "./Item";
+import AddNewItem from "./NewItemForm";
 
 class TodoList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: {[Date.now]: {
-                task: 'Clean room',
-                complete: false
-            }}
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      items: {
+        [Date.now()]: {
+          task: "Clean room",
+          complete: false
         }
+      }
+    };
+    this.addNewItem = this.addNewItem.bind(this);
+  }
+  addNewItem(item) {
+    if (item) {
+      this.setState(prevState => {
+        let items = { ...prevState.items };
+        items[Date.now()] = {
+          task: item,
+          complete: false
+        };
+        return { items };
+      });
     }
-    render() {
-        return(
-            <div> 
-                <ul>
-                 {Object.keys(this.state.items).map(item => <Item key={item} task={this.state.items[item].task} complete={this.state.items[item].complete}/>)}  
-                </ul>
-            </div>
-        );
-    }
-
+  }
+  render() {
+    const list = Object.keys(this.state.items).map(key => {
+      return (
+        <Item
+          key={key}
+          task={this.state.items[key].task}
+          complete={this.state.items[key].complete}
+        />
+      );
+    });
+    return (
+      <div>
+        <ul>{list}</ul>
+        <AddNewItem addNewItem={this.addNewItem} />
+      </div>
+    );
+  }
 }
 
 export default TodoList;
