@@ -1,7 +1,11 @@
 import React from "react";
-
 const Item = props => {
-  return <li style={{ listStyleType: "none" }}>{props.task}</li>;
+  return (
+    <p>
+      {props.task}
+      <button onClick={() => props.removeItem(props.id)}>X</button>
+    </p>
+  );
 };
 
 export default Item;

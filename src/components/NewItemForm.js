@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import "./NewItemForm.css";
 
-class AddNewItem extends Component {
+class NewItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +26,8 @@ class AddNewItem extends Component {
       <form id="newItemForm" onSubmit={this.handleSubmit}>
         <input
           type="text"
+          placeholder="Add new item here"
+          maxLength="25"
           value={this.state.value}
           onChange={this.handleChange}
         ></input>
@@ -35,4 +38,4 @@ class AddNewItem extends Component {
   }
 }
 
-export default AddNewItem;
+export default NewItemForm;
