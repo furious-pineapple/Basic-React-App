@@ -6,3 +6,7 @@
 #TodoList p {
   color: white;
 }
+
+.listDisplay {
+  display: block;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Item from "./Item";
 import AddNewItem from "./NewItemForm";
+import DisplayList from "./DisplayList";
+import Item from "./Item";
 import "./TodoList.css";
 
 class TodoList extends Component {
@@ -17,18 +18,17 @@ class TodoList extends Component {
     };
     this.addNewItem = this.addNewItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
   }
   addNewItem(item) {
-    if (item) {
-      this.setState(prevState => {
-        let items = { ...prevState.items };
-        items[Date.now()] = {
-          task: item,
-          complete: false
-        };
-        return { items };
-      });
-    }
+    this.setState(prevState => {
+      let items = { ...prevState.items };
+      items[Date.now()] = {
+        task: item,
+        status: false
+      };
+      return { items };
+    });
   }
   removeItem(itemId) {
     this.setState(prevState => {
@@ -37,21 +37,45 @@ class TodoList extends Component {
       return { items };
     });
   }
+  updateStatus(itemId) {
+    this.setState(prevState => {
+      let items = { ...prevState.items };
+      items[itemId].status = !items[itemId].status;
+      return { items };
+    });
+  }
   render() {
-    const list = Object.keys(this.state.items).map(key => {
-      return (
+    const completed = [];
+    const incompleted = [];
+    Object.keys(this.state.items).forEach(key => {
+      const item = (
         <Item
           key={key}
           id={key}
           task={this.state.items[key].task}
-          complete={this.state.items[key].complete}
-          removeItem={this.removeItem}
+          status={this.state.items[key].status}
+          removeItem={() => this.removeItem(key)}
+          updateStatus={() => this.updateStatus(key)}
         />
       );
+      if (this.state.items[key].status) {
+        completed.push(item);
+      } else {
+        incompleted.push(item);
+      }
     });
     return (
       <div id="TodoList">
-        {list}
+        <DisplayList
+          className="listDisplay"
+          title="Incompleted List"
+          items={incompleted}
+        />
+        <DisplayList
+          className="listDisplay"
+          title="Completed List"
+          items={completed}
+        />
         <AddNewItem addNewItem={this.addNewItem} />
       </div>
     );
