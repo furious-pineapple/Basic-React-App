@@ -1,8 +1,9 @@
 import React from "react";
+import "./DisplayList.css";
 
 const DisplayList = props => {
   return (
-    <div>
+    <div className="list">
       <h3>{props.title}</h3>
       {props.items}
     </div>

@@ -66,6 +66,7 @@ class TodoList extends Component {
     });
     return (
       <div id="TodoList">
+        <AddNewItem addNewItem={this.addNewItem} />
         <DisplayList
           className="listDisplay"
           title="Incompleted List"
@@ -76,7 +77,6 @@ class TodoList extends Component {
           title="Completed List"
           items={completed}
         />
-        <AddNewItem addNewItem={this.addNewItem} />
       </div>
     );
   }

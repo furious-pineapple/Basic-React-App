@@ -1,6 +1,9 @@
 #TodoList {
   margin: 0 auto;
-  width: 500px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #TodoList p {
