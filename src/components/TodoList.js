@@ -51,9 +51,7 @@ class TodoList extends Component {
       const item = (
         <Item
           key={key}
-          id={key}
-          task={this.state.items[key].task}
-          status={this.state.items[key].status}
+          item={this.state.items[key]}
           removeItem={() => this.removeItem(key)}
           updateStatus={() => this.updateStatus(key)}
         />

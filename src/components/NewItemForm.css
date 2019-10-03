@@ -8,7 +8,12 @@ input {
 }
 
 input[type="submit"] {
-  margin-top: 10px;
+  -webkit-appearance: none;
+  height: 2em;
+  margin-top: 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bolder;
 }
 
 input[type="text"] {

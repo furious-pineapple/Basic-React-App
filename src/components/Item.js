@@ -2,10 +2,10 @@ import React from "react";
 const Item = props => {
   return (
     <div>
-      <p>{props.task}</p>
-      <button onClick={() => props.removeItem(props.id)}>Delete</button>
-      <button onClick={() => props.updateStatus(props.id)}>
-        {props.status ? "X" : "✓"}
+      <p>{props.item.task}</p>
+      <button onClick={props.removeItem}>Delete</button>
+      <button onClick={props.updateStatus}>
+        {props.item.status ? "X" : "✓"}
       </button>
     </div>
   );
