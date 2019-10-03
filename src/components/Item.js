@@ -1,13 +1,13 @@
 import React from "react";
 const Item = props => {
   return (
-    <p>
-      {props.task}
+    <div>
+      <p>{props.task}</p>
       <button onClick={() => props.removeItem(props.id)}>Delete</button>
       <button onClick={() => props.updateStatus(props.id)}>
         {props.status ? "X" : "✓"}
       </button>
-    </p>
+    </div>
   );
 };
 

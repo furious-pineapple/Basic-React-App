@@ -8,6 +8,12 @@
 
 #TodoList p {
   color: white;
+  flex-basis: 70%;
+  margin: 0 auto;
+}
+
+#TodoList button {
+  flex-basis: 15%;
 }
 
 .listDisplay {

@@ -1,8 +1,17 @@
 .list {
-  width: 50%;
+  width: 42%;
+  margin: 0px 2%;
 }
 
 .list h3 {
   color: white;
   text-decoration: underline;
+}
+
+.list div {
+  display: flex;
+  border: white;
+  border-style: groove;
+  margin: 10px 0px;
+  padding: 8px 0px;
 }

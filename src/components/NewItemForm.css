@@ -10,6 +10,7 @@ input {
 input[type="submit"] {
   margin-top: 10px;
 }
+
 input[type="text"] {
   height: 2em;
 }
