@@ -5,7 +5,7 @@ const Item = props => {
       <p>{props.item.task}</p>
       <button onClick={props.removeItem}>Delete</button>
       <button onClick={props.updateStatus}>
-        {props.item.status ? "X" : "✓"}
+        {props.item.status ? "x" : "✓"}
       </button>
     </div>
   );

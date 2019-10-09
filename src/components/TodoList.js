@@ -9,12 +9,12 @@ class TodoList extends Component {
     super(props);
     this.state = {
       value: "",
-      items: {
-        [Date.now()]: {
+      items: [
+        {
           task: "Clean room",
           complete: false
         }
-      }
+      ]
     };
     this.addNewItem = this.addNewItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
@@ -22,52 +22,52 @@ class TodoList extends Component {
   }
   addNewItem(item) {
     this.setState(prevState => {
-      let items = { ...prevState.items };
-      items[Date.now()] = {
+      let items = [...prevState.items];
+      items.unshift({
         task: item,
         status: false
-      };
+      });
       return { items };
     });
   }
-  removeItem(itemId) {
+  removeItem(itemIndex) {
     this.setState(prevState => {
-      let items = { ...prevState.items };
-      delete items[itemId];
+      let items = [...prevState.items];
+      items.splice(itemIndex, 1);
       return { items };
     });
   }
-  updateStatus(itemId) {
+  updateStatus(itemIndex) {
     this.setState(prevState => {
-      let items = { ...prevState.items };
-      items[itemId].status = !items[itemId].status;
+      let items = [...prevState.items];
+      items[itemIndex].status = !items[itemIndex].status;
       return { items };
     });
   }
   render() {
     const completed = [];
     const incompleted = [];
-    Object.keys(this.state.items).forEach(key => {
+    for (let i = 0; i < this.state.items.length; i++) {
       const item = (
         <Item
-          key={key}
-          item={this.state.items[key]}
-          removeItem={() => this.removeItem(key)}
-          updateStatus={() => this.updateStatus(key)}
+          key={i}
+          item={this.state.items[i]}
+          removeItem={() => this.removeItem(i)}
+          updateStatus={() => this.updateStatus(i)}
         />
       );
-      if (this.state.items[key].status) {
+      if (this.state.items[i].status) {
         completed.push(item);
       } else {
         incompleted.push(item);
       }
-    });
+    }
     return (
       <div id="TodoList">
         <AddNewItem addNewItem={this.addNewItem} />
         <DisplayList
           className="listDisplay"
-          title="Incompleted List"
+          title="Todo List"
           items={incompleted}
         />
         <DisplayList

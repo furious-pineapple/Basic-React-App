@@ -1,13 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import "./DisplayList.css";
 
-const DisplayList = props => {
-  return (
-    <div className="list">
-      <h3>{props.title}</h3>
-      {props.items}
-    </div>
-  );
-};
+class DisplayList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      counter: 1
+    };
+    this.increaseCount = this.increaseCount.bind(this);
+  }
+  increaseCount(e) {
+    e.preventDefault();
+    this.setState(prevStat => {
+      return { counter: prevStat.counter + 1 };
+    });
+  }
+  decreaseCount() {
+    this.setState(prevStat => {
+      return { counter: prevStat.counter - 1 };
+    });
+  }
+  render() {
+    const maxItems = this.state.counter * 5;
+    const itemsToDisplay = this.props.items.slice(0, maxItems);
+    const shouldDisplay = itemsToDisplay.length !== this.props.items.length;
+    if (itemsToDisplay.length <= maxItems - 5) {
+      this.decreaseCount();
+    }
+    return (
+      <div className="list">
+        <h3>{this.props.title}</h3>
+        {itemsToDisplay}
+        {shouldDisplay ? (
+          <button onClick={this.increaseCount}>Load More</button>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  }
+}
 
 export default DisplayList;
